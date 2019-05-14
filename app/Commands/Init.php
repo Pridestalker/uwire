@@ -49,26 +49,24 @@ class Init extends Command
      */
     public function handle(): void
     {
-        //
-//	    $this->task( 'Setting up', function () {
-//	    	return $this->createConfigFile();
-//	    });
-//
-//	    $this->task('Create directories', function () {
-//	    	return $this->createDirectories();
-//	    });
-//	    $this->task('Create package.json', function () {
-//	    	return $this->createPackageJson();
-//	    });
-//	    $this->task('Creating WP Required files', function() {
-//		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
-//	    });
-//	    $this->task('Setup frontend files', function () {
-//		    return $this->createBasicLayout();
-//	    });
-//	   $this->task('Setup app files', function () {
-//		   return $this->createBasicClasses();
-//	   });
+	    $this->task( 'Setting up', function () {
+	    	return $this->createConfigFile();
+	    });
+	    $this->task('Create directories', function () {
+	    	return $this->createDirectories();
+	    });
+	    $this->task('Create package.json', function () {
+	    	return $this->createPackageJson();
+	    });
+	    $this->task('Creating WP Required files', function() {
+		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
+	    });
+	    $this->task('Setup frontend files', function () {
+		    return $this->createBasicLayout();
+	    });
+	   $this->task('Setup app files', function () {
+		   return $this->createBasicClasses();
+	   });
     }
 
     /**
