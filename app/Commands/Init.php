@@ -49,26 +49,29 @@ class Init extends Command
      */
     public function handle(): void
     {
-    	
-    	$this->info($this->getPharPath());
-//	    $this->task( 'Setting up', function () {
-//	    	return $this->createConfigFile();
-//	    });
-//	    $this->task('Create directories', function () {
-//	    	return $this->createDirectories();
-//	    });
-//	    $this->task('Create package.json', function () {
-//	    	return $this->createPackageJson();
-//	    });
-//	    $this->task('Creating WP Required files', function() {
-//		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
-//	    });
-//	    $this->task('Setup frontend files', function () {
-//		    return $this->createBasicLayout();
-//	    });
-//		$this->task('Setup app files', function () {
-//		   return $this->createBasicClasses();
-//		});
+    	$this->task( 'Setting up', function () {
+	    	return $this->createConfigFile();
+	    });
+	    
+	    $this->task('Create directories', function () {
+	    	return $this->createDirectories();
+	    });
+	    
+	    $this->task('Create package.json', function () {
+	    	return $this->createPackageJson();
+	    });
+	    
+	    $this->task('Creating WP Required files', function() {
+		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
+	    });
+
+	    $this->task('Setup frontend files', function () {
+		    return $this->createBasicLayout();
+	    });
+
+		$this->task('Setup app files', function () {
+		   return $this->createBasicClasses();
+		});
     }
 
     /**
@@ -147,7 +150,7 @@ class Init extends Command
     private function createPackageJson(): bool
     {
     	try {
-    		$package ['content']= $this->filesystem->get('resources/templates/json/package.json.mustache');
+    		$package ['content']= $this->filesystem->get($this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'json' . DIRECTORY_SEPARATOR . 'package.json.mustache');
 	    } catch (\Exception $e) {
     		$this->error($e->getMessage());
     		return false;
@@ -188,7 +191,9 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
     private function createStyleCss(): bool
     {
 	    try {
-		    $package ['style']['raw']= $this->filesystem->get('resources/templates/wp-default/style.css.mustache');
+		    $package ['style']['raw']= $this->filesystem->get(
+		    	$this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'wp-default' . DIRECTORY_SEPARATOR . 'style.css.mustache'
+		    );
 	    } catch (\Exception $e) {
 		    $this->error($e->getMessage());
 		    return false;
@@ -215,7 +220,9 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
     private function createBasicLayout(): bool
     {
 	    try {
-		    $package ['app.twig']['raw']= $this->filesystem->get('resources/templates/theme-default/base.layout.mustache');
+		    $package ['app.twig']['raw']= $this->filesystem->get(
+		    	$this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'theme-default' . DIRECTORY_SEPARATOR . 'base.layout.mustache'
+		    );
 	    } catch (\Exception $e) {
 		    $this->error($e->getMessage());
 		    return false;
@@ -260,14 +267,20 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 		    $this->filesystem->makeDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR, 0755, true);
 	    }
 	    
-	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get('resources/templates/theme-default/app.php'));
-	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . 'AppServiceProvider.php', $this->filesystem->get('resources/templates/theme-default/Appservice.php'));
-	    $this->filesystem->put($directory . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get('resources/templates/theme-default/config.php'));
+	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get(
+	    	$this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'theme-default' . DIRECTORY_SEPARATOR . 'app.php')
+	    );
+	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . 'AppServiceProvider.php', $this->filesystem->get(
+	    	$this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'theme-default' . DIRECTORY_SEPARATOR . 'Appservice.php'
+	    ));
+	    $this->filesystem->put($directory . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get(
+	    	$this->getPharPath() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'theme-default' . DIRECTORY_SEPARATOR . 'config.php'
+	    ));
 	
 	    return true;
     }
     
-    private function getPharPath()
+    private function getPharPath(): string
     {
 	    $path = \Phar::running(false);
 	    
