@@ -49,24 +49,26 @@ class Init extends Command
      */
     public function handle(): void
     {
-	    $this->task( 'Setting up', function () {
-	    	return $this->createConfigFile();
-	    });
-	    $this->task('Create directories', function () {
-	    	return $this->createDirectories();
-	    });
-	    $this->task('Create package.json', function () {
-	    	return $this->createPackageJson();
-	    });
-	    $this->task('Creating WP Required files', function() {
-		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
-	    });
-	    $this->task('Setup frontend files', function () {
-		    return $this->createBasicLayout();
-	    });
-	   $this->task('Setup app files', function () {
-		   return $this->createBasicClasses();
-	   });
+    	
+    	$this->info($this->getPharPath());
+//	    $this->task( 'Setting up', function () {
+//	    	return $this->createConfigFile();
+//	    });
+//	    $this->task('Create directories', function () {
+//	    	return $this->createDirectories();
+//	    });
+//	    $this->task('Create package.json', function () {
+//	    	return $this->createPackageJson();
+//	    });
+//	    $this->task('Creating WP Required files', function() {
+//		    return $this->createStyleCss() && $this->createFunctionsPhp() && $this->createIndexPhp();
+//	    });
+//	    $this->task('Setup frontend files', function () {
+//		    return $this->createBasicLayout();
+//	    });
+//		$this->task('Setup app files', function () {
+//		   return $this->createBasicClasses();
+//		});
     }
 
     /**
@@ -257,11 +259,22 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 		    $this->filesystem->makeDirectory($directory, 0755, true);
 		    $this->filesystem->makeDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR, 0755, true);
 	    }
-	
+	    
 	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get('resources/templates/theme-default/app.php'));
 	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Providers' . DIRECTORY_SEPARATOR . 'AppServiceProvider.php', $this->filesystem->get('resources/templates/theme-default/Appservice.php'));
 	    $this->filesystem->put($directory . DIRECTORY_SEPARATOR . 'app.php', $this->filesystem->get('resources/templates/theme-default/config.php'));
 	
 	    return true;
+    }
+    
+    private function getPharPath()
+    {
+	    $path = \Phar::running(false);
+	    
+	    if (\Phar::running( false ) !== '') {
+		    $path = dirname($path) . DIRECTORY_SEPARATOR;
+	    }
+	    
+	    return $path;
     }
 }
