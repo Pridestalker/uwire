@@ -127,11 +127,11 @@ class Init extends Command
     		$this->filesystem->makeDirectory(getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR  . 'layouts');
 	    }
     	
-    	if (!$this->filesystem->isDirectory($this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'config'))) {
-    		$this->filesystem->makeDirectory($this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'config'));
+    	if (!$this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'config')) {
+    		$this->filesystem->makeDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'config');
 	    }
-    	if (!$this->filesystem->isDirectory($this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'Providers'))) {
-    		$this->filesystem->makeDirectory($this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'Providers'));
+    	if (!$this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'Providers')) {
+    		$this->filesystem->makeDirectory(getcwd() . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR  . 'Providers');
 	    }
     	
     	if (!$this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR  . 'layouts' . DIRECTORY_SEPARATOR . 'helpers')) {
