@@ -170,15 +170,15 @@ class Init extends Command
     
     private function createFunctionsPhp(): bool
     {
-	    $bareData = "<?php
+	    $bareData = "<?php\r\n\r\n
 include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 	    
 	    $bareData .= $this->confirm('Do you want to add theme support for `custom-logo`?', true)
-	        ? 'add_theme_support(\'custom-logo\');\r\n'
+	        ? "add_theme_support('custom-logo');\r\n"
 		    : '';
 	     
 	    $bareData .= $this->confirm('Do you want to add theme support for `woocommerce`?', false)
-	        ? 'add_theme_support(\'woocommerce\');\r\n'
+	        ? "add_theme_support('woocommerce');\r\n"
 		    : '';
 	    
 	    
@@ -202,7 +202,7 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 	    $package ['style']['rendered'] = $this->mustache->render($package['style']['raw'], [
 	    	'theme_name'        => $this->data['name'],
 		    'theme_uri'         => $this->ask('What is the theme uri'),
-		    'theme_author'      => $this->ask('What\'s your name?' ),
+		    'theme_author'      => $this->ask('What\'s your name?'),
 		    'author_uri'        => $this->ask('What\'s your website'),
 		    'theme_description' => $this->ask('Describe your theme'),
 		    'license'           => $this->ask('what license do you want?'),
@@ -230,7 +230,7 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 	    
 	    $package ['app.twig']['rendered'] = $this->mustache->render($package['app.twig']['raw'], []);
 	
-	    $directory = getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR;
+	    $directory = getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR;
 	    
 	    if (!$this->filesystem->isDirectory($directory)) {
 	    	$this->filesystem->makeDirectory($directory, 0755, true);
@@ -245,7 +245,7 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
     
     private function createBasicHelpers(): bool
     {
-	    $directory = getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'base' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR;
+	    $directory = getcwd() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'layouts' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR;
 	
 	    if (!$this->filesystem->isDirectory($directory)) {
 		    $this->filesystem->makeDirectory($directory, 0755, true);
