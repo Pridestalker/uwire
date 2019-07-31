@@ -185,7 +185,6 @@ include_once get_stylesheet_directory() . '/vendor/autoload.php'; \r\n";
 	    $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'functions.php', $bareData);
 	
 	    return true;
-	    
     }
     
     private function createStyleCss(): bool
