@@ -49,16 +49,16 @@ class Init extends Command
      */
     public function handle(): void
     {
-    	$this->task( 'Setting up', function () {
-	    	return $this->createConfigFile();
+    	$this->task('Setting up', function () {
+            return $this->call('create:config');
 	    });
 	    
 	    $this->task('Create directories', function () {
-	    	return $this->createDirectories();
+            $this->call('create:directories');
 	    });
 	    
 	    $this->task('Create package.json', function () {
-	    	return $this->createPackageJson();
+	    	$this->call('create:package');
 	    });
 	    
 	    $this->task('Creating WP Required files', function() {
@@ -85,6 +85,10 @@ class Init extends Command
         // $schedule->command(static::class)->everyMinute();
     }
     
+    /**
+     * @deprecated
+     * @return bool
+     */
     private function createConfigFile(): bool
     {
     	if (!$this->confirm('Do you want to create a new uWire theme?', true)) {
@@ -116,6 +120,10 @@ class Init extends Command
     	return $this->filesystem->put(getcwd() . DIRECTORY_SEPARATOR . 'uwire.config.json', json_encode($this->data));
     }
     
+    /**
+     * @deprecated
+     * @return bool
+     */
     private function createDirectories(): bool
     {
     	if (!$this->filesystem->isDirectory(getcwd() . DIRECTORY_SEPARATOR . 'assets')) {
@@ -147,6 +155,10 @@ class Init extends Command
     	return true;
     }
     
+    /**
+     * @deprecated
+     * @return bool
+     */
     private function createPackageJson(): bool
     {
     	try {
