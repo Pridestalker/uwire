@@ -1,0 +1,15 @@
+{{& startLine }}
+
+include_once get_stylesheet_directory() . '/vendor/autoload.php';
+
+{{#customLogo}}
+add_theme_support('custom-logo');
+{{/customLogo}}
+
+{{#wooCommerce}}
+add_theme_support('woocommerce');
+{{/wooCommerce}}
+
+\Timber\Timber::$locations = [
+    get_stylesheet_directory() . '/templates/',
+];

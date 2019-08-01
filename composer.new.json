@@ -1,0 +1,22 @@
+{
+  "require": {
+        "yahnis-elsts/plugin-update-checker": "^4.6",
+        "aristath/kirki": "^3.0",
+        "timber/timber": "^1.10",
+        "jjgrainger/posttypes": "^2.0",
+        "htmlburger/carbon-fields": "^3.1",
+        "dusank/knapsack": "^10.0"
+  },
+  "require-dev": {
+        "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    },
+    "files": [
+      "vendor/aristath/kirki/kirki.php",
+      "src/app.php"
+    ]
+  }
+}

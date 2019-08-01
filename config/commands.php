@@ -60,6 +60,12 @@ return [
         Illuminate\Console\Scheduling\ScheduleRunCommand::class,
         Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
         Illuminate\Foundation\Console\VendorPublishCommand::class,
+        \App\Commands\Creates\ConfigCreate::class,
+        \App\Commands\Creates\DirectoriesCreate::class,
+        \App\Commands\Creates\PackageCreate::class,
+        \App\Commands\Creates\Css\StyleCreate::class,
+        \App\Commands\Creates\Php\IndexCreate::class,
+        \App\Commands\Creates\Php\FunctionsCreate::class,
     ],
 
     /*
