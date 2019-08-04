@@ -12,15 +12,25 @@ class ClassCreate extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'create:class
+                            {type=general : The type of class}
+                            {--N|name= : The classname}
+                            {--P|path= : The relative path where to add the class}
+                            {--namespace= : The namespace the class should be in}
+                            ';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Command description';
-
+    protected $description = 'Create a class on specific type';
+    
+    /**
+     * @var string $name
+     */
+    protected $name;
+    
     /**
      * Execute the console command.
      *
@@ -29,16 +39,19 @@ class ClassCreate extends Command
     public function handle()
     {
         //
+        $this->info($this->argument('type'));
+        
+        $this->handleName();
     }
-
-    /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
-     */
-    public function schedule(Schedule $schedule): void
+    
+    private function handleName(): void
     {
-        // $schedule->command(static::class)->everyMinute();
+        if ($name = $this->option('name')) {
+            $this->info($name);
+            
+            $this->name = $name;
+        } else {
+            $this->name = $this->ask('Enter classname');
+        }
     }
 }
