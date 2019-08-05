@@ -71,15 +71,4 @@ class ConfigCreate extends Command
         
         return $this->fsc->storeFile($fileDir, json_encode($data));
     }
-
-    /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
-     */
-    public function schedule(Schedule $schedule): void
-    {
-        // $schedule->command(static::class)->everyMinute();
-    }
 }

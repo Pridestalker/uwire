@@ -32,16 +32,24 @@ class ClassCreate extends Command
     protected $name;
     
     /**
+     * @var string $type
+     */
+    protected $type;
+    
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-        //
-        $this->info($this->argument('type'));
-        
+        $this->handleType();
         $this->handleName();
+    }
+    
+    private function handleType(): void
+    {
+        $this->type = $this->argument('type');
     }
     
     private function handleName(): void
